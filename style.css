@@ -1,0 +1,115 @@
+/* style.css - MECHLAB Custom Vanilla Stylesheet */
+
+/* Font Family Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #09090b;
+  color: #f4f4f5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Webkit scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Smooth fade-in animation for Mega Menu */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Hover-bridge / Mouse-bridge for seamless Mega Menu interaction */
+#linh-kien-mega-menu {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: 960px;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  padding: 24px;
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  z-index: 999;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  color: #333333;
+}
+
+/* Creating the invisible bridging pseudo-element */
+#linh-kien-mega-menu::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -20px;
+  width: 20px;
+  background: transparent;
+  z-index: -1;
+}
+
+/* Display flex when hovering parent or self */
+.group-hover-submenu:hover #linh-kien-mega-menu {
+  display: grid;
+}
+
+/* Slider transitions */
+.slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 1;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* General design touches */
+.text-brand-blue {
+  color: #0000FF;
+}
+
+.bg-brand-blue {
+  background-color: #0000FF;
+}
+
+.border-brand-blue {
+  border-color: #0000FF;
+}
+
+/* Glow effects */
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 255, 0.2);
+}

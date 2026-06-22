@@ -1,13 +1,1181 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MECHLAB | High-end Custom PC & Gaming Gear</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons Library (via CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-blue': '#0000FF',
+              'brand-orange': '#FF6B00'
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-[#09090b] text-[#f4f4f5] antialiased">
 
+    <!-- Top Banner Line -->
+    <div class="bg-[#0000FF] text-white text-[10.5px] font-bold text-center py-2 px-4 shadow-sm relative z-50 uppercase tracking-widest select-none">
+        ★ HOTLINE: 0763 966 688 | KHIẾU NẠI: 0902 301 168 | ĐỊA CHỈ: 73 KHUÔNG VIỆT, PHƯỜNG PHÚ TRUNG, QUẬN TÂN PHÚ, TP. HỒ CHÍ MINH ★
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="bg-[#0c0c0e] border-b border-zinc-950 sticky top-0 z-[40]">
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 h-16 flex items-center justify-between gap-4">
+            
+            <!-- Logo area -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="filterCategory('all'); window.scrollTo({top: 0, behavior: 'smooth'});">
+                <div class="w-10 h-10 bg-[#0000FF] flex items-center justify-center relative overflow-hidden">
+                    <span class="text-white font-black text-xl font-mono">M</span>
+                    <div class="absolute inset-0 bg-white opacity-10 transform skew-x-12"></div>
+                </div>
+                <div>
+                    <h1 class="font-sans font-black text-lg text-white tracking-widest uppercase leading-none">MECHLAB</h1>
+                    <span class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest leading-none block">EXPERIMENTAL</span>
+                </div>
+            </div>
+
+            <!-- Search Area -->
+            <div class="hidden md:flex flex-1 max-w-xl relative">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Tìm kiếm sản phẩm, bàn phím, tản nước custom..." 
+                    class="w-full bg-[#121214] border border-zinc-800 text-xs py-2.5 pl-4 pr-10 rounded-none focus:outline-none focus:border-[#0000FF] placeholder-zinc-600 transition-all font-sans"
+                    oninput="handleSearch(this.value)"
+                >
+                <div class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-600">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                </div>
+            </div>
+
+            <!-- Header Operations -->
+            <div class="flex items-center gap-4">
+                <a href="#custom-section" class="hidden lg:flex items-center gap-2 border border-zinc-800 hover:border-[#0000FF] text-xs font-bold py-2 px-3 transition-colors text-zinc-300">
+                    <i data-lucide="compass" class="w-4 h-4 text-[#0000FF]"></i>
+                    <span>TỰ DỰNG CẤU HÌNH BẢN 3D</span>
+                </a>
+
+                <!-- Cart Action Trigger -->
+                <button 
+                    type="button" 
+                    onclick="toggleCart(true)"
+                    class="relative bg-[#121214] border border-zinc-800 hover:border-[#0000FF] p-2.5 transition-colors cursor-pointer"
+                >
+                    <i data-lucide="shopping-cart" class="w-4 h-4 text-white"></i>
+                    <span id="cart-counter" class="absolute -top-1.5 -right-1.5 bg-[#0000FF] text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN HERO & MEGAMENU SECTION -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-6 w-full pt-6">
+        <div class="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-0.5 items-stretch relative min-h-[460px]">
+            
+            <!-- Left Category Menu Container (250px width, Flat Solid Layout) -->
+            <div class="hidden lg:block relative z-[35] bg-white border border-zinc-200 p-2 flex flex-col justify-between">
+                <div class="space-y-1">
+                    
+                    <!-- Blue Header Title withhamburger Menu Icon -->
+                    <div class="pb-2 border-b border-zinc-100 px-2 flex items-center gap-2 text-[#0000FF]">
+                        <i data-lucide="menu" class="w-4 h-4 stroke-[2.5px]"></i>
+                        <h3 class="font-sans font-black text-xs tracking-wider uppercase">
+                            DANH MỤC SẢN PHẨM
+                        </h3>
+                    </div>
+
+                    <!-- 14 Pure Vertical Menu items -->
+                    <div class="pt-1.5 space-y-0 text-zinc-700">
+                        
+                        <!-- LINH KIỆN PC with hover Mega Menu -->
+                        <div class="relative group-hover-submenu">
+                            <button onclick="filterCategory('all')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold text-zinc-700 hover:text-[#0000FF] bg-transparent text-left group">
+                                <span class="flex items-center gap-2 uppercase truncate">
+                                    <i data-lucide="cpu" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                    LINH KIỆN PC
+                                </span>
+                                <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                            </button>
+
+                            <!-- ABSOLUTE MEGA MENU (POSITION: ABSOLUTE, LEFT: 250px, WIDTH: 960px, NO BOR CORNER, WHITE BG, BLUE TEXTS) -->
+                            <div id="linh-kien-mega-menu" class="animate-fade-in shadow-2xl">
+                                <!-- Blue Left boundary Strip -->
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-[#0000FF]"></div>
+                                
+                                <!-- Column 1 -->
+                                <div class="flex flex-col justify-between h-full space-y-6">
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            MAINBOARD - BO MẠCH CHỦ
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">ASUS ROG Maximus & Crosshair</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">GIGABYTE AORUS Xtreme & Master</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">MSI MEG & MPG High-end Series</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">ASRock Taichi & Phantom</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">NZXT N7 Metal Design Armor</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            HDD
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">WD Purple Pro / Red NAS</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Seagate IronWolf / BarraCuda</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Seagate Exos Enterprise</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Column 2 -->
+                                <div class="flex flex-col justify-between h-full space-y-6">
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            CPU - BỘ VI XỬ LÝ
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Intel Core Ultra 9 / i9-14900KS</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Intel Core Ultra 7 / i7-14700K</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">AMD Ryzen 9 9950X / 7950X3D</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">AMD Ryzen 7 9800X3D Gaming</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Dịch vụ Delid mạ kim loại lỏng</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            NGUỒN THEO HÃNG
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Nguồn ASUS ROG Premium</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Nguồn Corsair Pro Platinum</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Nguồn Seasonic Modular</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Column 3 -->
+                                <div class="flex flex-col justify-between h-full space-y-6">
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            RAM PC
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">G.Skill Trident Z5 RGB DDR5</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Corsair Dominator Platinum</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">TeamGroup T-Force Delta</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Kit tản đồng bọc nước RAM</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            NGUỒN THEO CÔNG SUẤT
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Nguồn dưới 750W</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Nguồn từ 750W đến 1000W</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed">Nguồn cao cấp trên 1000W</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Column 4 -->
+                                <div class="flex flex-col justify-between h-full space-y-6">
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            SSD
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Samsung 990 PRO M.2 PCIe Gen 5</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">WD Black SN850X Gaming</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Crucial T700 Gen5 12400MB/s</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Tản nhiệt block nước SSD</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-sans font-bold text-[11px] text-[#0000FF] tracking-wider uppercase mb-[15px] pb-1.5 border-b border-zinc-100 select-none">
+                                            CASE - VỎ MÁY TÍNH
+                                        </h4>
+                                        <ul class="space-y-1.5">
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Lian Li O11 Vision / EVO</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Phanteks NV9 Premium Glass</a></li>
+                                            <li><a href="#all-products" onclick="filterCategory('all')" class="block text-[10.5px] text-[#333333] hover:text-[#0000FF] transition-colors duration-150 leading-relaxed truncate">Fractal Design North Walnut Wood</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VGA -->
+                        <button onclick="filterCategory('vga')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="layers" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                VGA - CARD MÀN HÌNH
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Màn hình -->
+                        <button onclick="filterCategory('man-hinh')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="monitor" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                MÀN HÌNH
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Laptop -->
+                        <button onclick="filterCategory('laptop')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="laptop" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                LAPTOP
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- NAS -->
+                        <button onclick="filterCategory('nas')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="server" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                NAS SYNOLOGY VÀ PHỤ KIỆN
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Tản nhiệt -->
+                        <button onclick="filterCategory('pc-water')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="wind" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                TẢN NHIỆT - FAN CASE
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Phụ kiện -->
+                        <button onclick="filterCategory('gear')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="package" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                PHỤ KIỆN
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Bàn phím -->
+                        <button onclick="filterCategory('keyboard')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="keyboard" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                BÀN PHÍM
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Chuột -->
+                        <button onclick="filterCategory('gear')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="mouse-pointer" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                CHUỘT + LÓT CHUỘT
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Tai nghe -->
+                        <button onclick="filterCategory('gear')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="headphones" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                TAI NGHE
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Ghế -->
+                        <button onclick="filterCategory('gear')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                GHẾ GAMING
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Âm thanh -->
+                        <button onclick="filterCategory('gear')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                ÂM THANH - AUDIO
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- PC MECHLAB -->
+                        <button onclick="filterCategory('pc-water')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="settings" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                PC MECHLAB
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+
+                        <!-- Thiết bị mạng -->
+                        <button onclick="filterCategory('gear')" class="w-full flex items-center justify-between py-1.5 px-2 text-[10.5px] font-bold hover:text-[#0000FF] bg-transparent text-left group">
+                            <span class="flex items-center gap-2 uppercase truncate">
+                                <i data-lucide="wifi" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#0000FF] transition-colors"></i>
+                                THIẾT BI MẠNG
+                            </span>
+                            <i data-lucide="chevron-right" class="w-3 h-3 text-zinc-300 group-hover:text-[#0000FF]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Footer tag -->
+                <div class="pt-2 border-t border-zinc-100 px-2 select-none shrink-0">
+                    <div class="flex items-center gap-1 text-zinc-400 text-[9px] font-mono leading-none font-bold uppercase tracking-wider">
+                        <i data-lucide="wrench" class="w-2.5 h-2.5 text-[#0000FF]"></i>
+                        <span>MECHLAB PLATFORM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero sliding banner (Fits seamless alignment) -->
+            <div class="overflow-hidden rounded-none border border-zinc-900 bg-[#09090b] h-full flex flex-col justify-stretch relative">
+                <div class="slider-container h-[420px] lg:h-full relative w-full">
+                    
+                    <!-- Slide 1 -->
+                    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=1200'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent flex flex-col justify-center px-10">
+                            <span class="text-[#0000FF] text-xs font-mono font-black tracking-widest uppercase mb-2 block">D.I.Y LABORATORY STORE</span>
+                            <h2 class="text-3xl md:text-4xl font-sans font-black text-white leading-tight uppercase max-w-lg mb-4">PC TẢN NƯỚC CUSTOM CAO CẤP</h2>
+                            <p class="text-zinc-300 text-xs max-w-md mb-6 leading-relaxed">Trải nghiệm hệ thống máy tính cực hạn độc quyền mạ Chrome. Kiểm định nghiêm ngặt chuẩn Mechlab Laboratory.</p>
+                            <div class="flex gap-4">
+                                <a href="#all-products" class="bg-[#0000FF] hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 transition-colors select-none">MUA NGAY</a>
+                                <a href="#custom-section" class="border border-white/20 hover:border-white text-white font-bold text-xs py-3 px-6 transition-colors select-none">TỰ BUILD MÁY</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=1200'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent flex flex-col justify-center px-10">
+                            <span class="text-[#0000FF] text-xs font-mono font-black tracking-widest uppercase mb-2 block">Premium Keyboards</span>
+                            <h2 class="text-3xl md:text-4xl font-sans font-black text-white leading-tight uppercase max-w-lg mb-4">BÀN PHÍM CƠ NGUYÊN KHỐI CNC</h2>
+                            <p class="text-zinc-300 text-xs max-w-md mb-6 leading-relaxed">Cảm giác gõ đầm ấm đỉnh cao nhờ quy trình bôi trơn Krytox thủ công cực chuẩn.</p>
+                            <div class="flex gap-4">
+                                <a href="#all-products" class="bg-[#0000FF] hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 transition-colors select-none">XEM PHÍM CƠ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Arrows -->
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-[30] bg-black/60 hover:bg-[#0000FF] text-white p-2 rounded-full cursor-pointer transition-colors">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-[30] bg-black/60 hover:bg-[#0000FF] text-white p-2 rounded-full cursor-pointer transition-colors">
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- SHOPPING TRUST BAR -->
+    <section class="max-w-7xl mx-auto px-4 lg:px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-6 select-none bg-[#0c0c0e] border border-zinc-900 mt-6 font-sans">
+        <div class="flex items-center gap-3">
+            <i data-lucide="shield-check" class="w-8 h-8 text-[#0000FF] shrink-0"></i>
+            <div>
+                <h4 class="text-xs font-bold uppercase text-white">BẢO HÀNH CHÍNH HÃNG</h4>
+                <p class="text-[10.5px] text-zinc-500">Hỗ trợ tận nơi tại MECHLAB Lab trong 3 năm.</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <i data-lucide="truck" class="w-8 h-8 text-[#0000FF] shrink-0"></i>
+            <div>
+                <h4 class="text-xs font-bold uppercase text-white">GIAO HÀNG HỎA TỐC</h4>
+                <p class="text-[10.5px] text-zinc-500">Miễn phí giao hàng nội thành thành phố trong 2h.</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <i data-lucide="wrench" class="w-8 h-8 text-[#0000FF] shrink-0"></i>
+            <div>
+                <h4 class="text-xs font-bold uppercase text-white">CÂN CHỈNH MIỄN PHÍ</h4>
+                <p class="text-[10.5px] text-zinc-500">Bôi trơn switch phím cơ, vệ sinh PC định kỳ.</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <i data-lucide="percent" class="w-8 h-8 text-[#0000FF] shrink-0"></i>
+            <div>
+                <h4 class="text-xs font-bold uppercase text-white">TRẢ GÓP LÃI SUẤT 0%</h4>
+                <p class="text-[10.5px] text-zinc-500">Thanh toán thẻ tín dụng dễ dàng trong 12 tháng.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE LAB CONFIGURATORS (D.I.Y MODULES) -->
+    <section id="custom-section" class="max-w-7xl mx-auto px-4 lg:px-6 pt-12">
+        <div class="border-b border-zinc-900 pb-4 mb-6">
+            <span class="text-[10px] text-[#0000FF] font-mono font-bold tracking-widest block mb-1">01 / ONLINE EXPERIMENT</span>
+            <h3 class="font-sans font-black text-2xl text-white tracking-wider uppercase">PHÒNG THÍ NGHIỆM TỰ PHỐI CẤU HÌNH (D.I.Y)</h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- PC Builder Customizer -->
+            <div class="bg-[#0c0c0e] border border-zinc-900 p-6">
+                <div class="flex items-center gap-2.5 pb-4 mb-6 border-b border-zinc-800">
+                    <i data-lucide="compass" class="text-[#0000FF] w-5 h-5"></i>
+                    <h4 class="font-sans font-black text-sm text-white uppercase tracking-wider">PHÂN KHU RÁP PC CHUYÊN NGHIỆP</h4>
+                </div>
+                
+                <div class="space-y-4 font-sans text-xs">
+                    <!-- CPU Row -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Vi xử lý (CPU)</span>
+                        <select id="pc-cpu" onchange="calculatePCPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="0">Chưa chọn (+ 0 đ)</option>
+                            <option value="16500000" selected>Intel Core i9-14900KS (+ 16.500.000 đ)</option>
+                            <option value="11200000">Intel Core i7-14700K (+ 11.200.000 đ)</option>
+                            <option value="9800000">AMD Ryzen 7 9800X3D (+ 9.800.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- Motherboard Row -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Mainboard</span>
+                        <select id="pc-main" onchange="calculatePCPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="0">Chưa chọn (+ 0 đ)</option>
+                            <option value="18900000" selected>ROG MAXIMUS Z790 HERO (+ 18.900.000 đ)</option>
+                            <option value="7800000">MSI MPG X670E Carbon WiFi (+ 7.800.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- VGA Row -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Đồ họa (VGA)</span>
+                        <select id="pc-vga" onchange="calculatePCPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="0">Chưa chọn (+ 0 đ)</option>
+                            <option value="64900000" selected>NVIDIA ROG Strix RTX 4090 24GB (+ 64.900.000 đ)</option>
+                            <option value="34800000">ASUS TUF Gaming RTX 4080 Super (+ 34.800.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- RAM Row -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">RAM</span>
+                        <select id="pc-ram" onchange="calculatePCPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="0">Chưa chọn (+ 0 đ)</option>
+                            <option value="8500000" selected>64GB G.Skill Trident Z5 RGB (+ 8.500.000 đ)</option>
+                            <option value="4200000">32GB Corsair Dominator Titanium (+ 4.200.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- Storage Row -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">SSD Lưu trữ</span>
+                        <select id="pc-ssd" onchange="calculatePCPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="0">Chưa chọn (+ 0 đ)</option>
+                            <option value="5900000" selected>2TB Samsung 990 Pro PCIe Gen5 (+ 5.900.000 đ)</option>
+                            <option value="3100000">1TB WD Black SN850X (+ 3.100.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- Water cooling design Row -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Bộ tản nước</span>
+                        <select id="pc-water-cool" onchange="calculatePCPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="0">Dùng tản nhiệt khí tiêu chuẩn (+ 0 đ)</option>
+                            <option value="25000000" selected>Dual-Loop Hardtube Chrome & Carbon (+ 25.000.000 đ)</option>
+                            <option value="12500000">Acrylic Block Soft-tube Single Loop (+ 12.500.000 đ)</option>
+                        </select>
+                    </div>
+
+                    <!-- Price calculation totalizer -->
+                    <div class="pt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[9.5px] font-mono text-zinc-500 uppercase block">Giá cấu hình ước tính</span>
+                            <span id="pc-total-price" class="text-xl font-bold text-[#0000FF]">139.700.000 đ</span>
+                        </div>
+                        <button onclick="addCustomPCToCart()" class="bg-[#0000FF] hover:bg-blue-700 text-white font-bold text-xs py-2.5 px-5 transition-colors cursor-pointer uppercase">
+                            Thêm vào giỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Mechanical Keyboard Builder -->
+            <div class="bg-[#0c0c0e] border border-zinc-900 p-6">
+                <div class="flex items-center gap-2.5 pb-4 mb-6 border-b border-zinc-800">
+                    <i data-lucide="keyboard" class="text-[#0000FF] w-5 h-5"></i>
+                    <h4 class="font-sans font-black text-sm text-white uppercase tracking-wider">PHÂN KHU RÁP PHÍM CƠ TIÊU CHUẨN</h4>
+                </div>
+
+                <div class="space-y-4 font-sans text-xs">
+                    <!-- Layout row -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Layout</span>
+                        <select id="kb-layout" onchange="calculateKBPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="1500000" selected>Layout 75% Compact (+ 1.500.000 đ)</option>
+                            <option value="1200000">Layout 60% Ultra-compact (+ 1.200.000 đ)</option>
+                            <option value="1900000">Fullsize 100% Layout (+ 1.900.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- Case shell Material -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Vỏ bàn phím</span>
+                        <select id="kb-case" onchange="calculateKBPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="2500000" selected>Nhôm CNC 6063 Cao cấp (+ 2.500.000 đ)</option>
+                            <option value="800000">Acrylic dập mờ xuyên Led (+ 800.000 đ)</option>
+                            <option value="450000">Nhựa ABS đúc khối (+ 450.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- Switch selections -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Switches</span>
+                        <select id="kb-switch" onchange="calculateKBPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="980000" selected>Gateron Oil King (Linear lube sẵn) (+ 980.000 đ)</option>
+                            <option value="720000">Kailh Box Jade (Clicky sướng tai) (+ 720.000 đ)</option>
+                            <option value="1200000">Cherry MX Black Vintage (Thocky) (+ 1.200.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- Keycap selection sets -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Keycaps</span>
+                        <select id="kb-keycap" onchange="calculateKBPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="1200000" selected>PBT Keycap exclusive MECHLAB (+ 1.200.000 đ)</option>
+                            <option value="450000">Clear-Polycarbonate xuyên led (+ 450.000 đ)</option>
+                        </select>
+                    </div>
+                    <!-- Coiled custom Cable -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-900/60 pb-3">
+                        <span class="text-zinc-400 font-bold w-24">Dây cáp</span>
+                        <select id="kb-cable" onchange="calculateKBPrice()" class="bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 min-w-[240px] focus:outline-none focus:border-[#0000FF]">
+                            <option value="0">Dùng cáp nhựa mặc định (+ 0 đ)</option>
+                            <option value="490000" selected>Coiled Cable kèm đầu phi công GX16 (+ 490.000 đ)</option>
+                        </select>
+                    </div>
+
+                    <!-- Price calculation totalizer -->
+                    <div class="pt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[9.5px] font-mono text-zinc-500 uppercase block">Giá combo phím ước tính</span>
+                            <span id="kb-total-price" class="text-xl font-bold text-[#0000FF]">6.670.000 đ</span>
+                        </div>
+                        <button onclick="addCustomKBToCart()" class="bg-[#0000FF] hover:bg-blue-700 text-white font-bold text-xs py-2.5 px-5 transition-colors cursor-pointer uppercase">
+                            Thêm vào giỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRODUCT CATALOG -->
+    <section id="all-products" class="max-w-7xl mx-auto px-4 lg:px-6 pt-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-zinc-900 pb-4 mb-8 gap-4">
+            <div>
+                <span class="text-[10px] text-[#0000FF] font-mono font-bold tracking-widest block mb-1">02 / LABORATORY CATALOG</span>
+                <h3 class="font-sans font-black text-2xl text-white tracking-wider uppercase">SẢN PHẨM HIỆN CÓ SẴN TẠI MECHLAB</h3>
+            </div>
+            
+            <!-- Filter buttons -->
+            <div class="flex flex-wrap gap-2 text-xs font-mono select-none">
+                <button onclick="filterCategory('all')" id="tab-all" class="category-tab bg-[#0000FF] text-white py-2 px-3 hover:bg-blue-700 transition-colors uppercase font-bold">TẤT CẢ</button>
+                <button onclick="filterCategory('pc-water')" id="tab-pc-water" class="category-tab bg-[#121214] border border-zinc-800 text-zinc-450 py-2 px-3 hover:border-zinc-750 transition-colors uppercase font-bold">TẢN NƯỚC CUSTOM</button>
+                <button onclick="filterCategory('keyboard')" id="tab-keyboard" class="category-tab bg-[#121214] border border-zinc-800 text-zinc-450 py-2 px-3 hover:border-zinc-750 transition-colors uppercase font-bold">BÀN PHÍM CƠ</button>
+                <button onclick="filterCategory('gear')" id="tab-gear" class="category-tab bg-[#121214] border border-zinc-800 text-zinc-450 py-2 px-3 hover:border-zinc-750 transition-colors uppercase font-bold">PHỤ KIỆN GEAR</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic products will be loaded here by JS so they can also be modified manually within HTML array -->
+        </div>
+    </section>
+
+    <!-- Pulsating Hotspot Showcase (Góc máy trưng bày) -->
+    <section class="max-w-7xl mx-auto px-4 lg:px-6 pt-16 pb-12">
+        <div class="border-b border-zinc-900 pb-4 mb-8">
+            <span class="text-[10px] text-[#0000FF] font-mono font-bold tracking-widest block mb-1">03 / SHOWCASE CORNER</span>
+            <h3 class="font-sans font-black text-2xl text-white tracking-wider uppercase">GÓC MÁY TRƯNG BÀY MECHLAB ĐÃ BÀN GIAO</h3>
+        </div>
+
+        <div class="relative overflow-hidden border border-zinc-900 aspect-[16/9] w-full">
+            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&q=80&w=1200" alt="Góc máy Mechlab" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/25"></div>
+
+            <!-- Hotspot 1: PC custom loop -->
+            <div class="absolute" style="top: 38%; left: 24%;">
+                <div class="relative group">
+                    <button class="w-6 h-6 bg-[#0000FF] rounded-full border-2 border-white animate-ping absolute opacity-75 pointer-events-none"></button>
+                    <button class="w-6 h-6 bg-[#0000FF] rounded-full border-2 border-white relative z-10 flex items-center justify-center cursor-pointer font-black text-[10px] text-white">+</button>
+                    
+                    <!-- Information Overlay -->
+                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-56 bg-zinc-950 border border-zinc-800 p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none duration-250 z-20 shadow-xl">
+                        <span class="text-[8px] font-mono text-[#0000FF] block uppercase tracking-widest">SIÊU PHẨM PC CUSTOM</span>
+                        <h5 class="text-xs font-bold text-white uppercase mt-0.5">MECHLAB TITAN PC</h5>
+                        <p class="text-[10px] text-[#0000FF] font-bold mt-1">139.900.000 đ</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotspot 2: Bàn phím custom -->
+            <div class="absolute" style="top: 72%; left: 52%;">
+                <div class="relative group">
+                    <button class="w-6 h-6 bg-[#0000FF] rounded-full border-2 border-white animate-ping absolute opacity-75 pointer-events-none"></button>
+                    <button class="w-6 h-6 bg-[#0000FF] rounded-full border-2 border-white relative z-10 flex items-center justify-center cursor-pointer font-black text-[10px] text-white">+</button>
+                    
+                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-56 bg-zinc-950 border border-zinc-800 p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none duration-250 z-20 shadow-xl">
+                        <span class="text-[8px] font-mono text-[#0000FF] block uppercase tracking-widest">BÀN PHÍM CƠ CHUẨN LAB</span>
+                        <h5 class="text-xs font-bold text-white uppercase mt-0.5">GALAXY 75 CNC SLATE</h5>
+                        <p class="text-[10px] text-[#0000FF] font-bold mt-1">5.490.000 đ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE INQUIRY CONSULTATION -->
+    <section class="max-w-7xl mx-auto px-4 lg:px-6 py-12 border-t border-zinc-900">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-[10px] text-[#0000FF] font-mono font-bold tracking-widest block mb-1">04 / CUSTOM CONSULTATION</span>
+                <h3 class="font-sans font-black text-2xl text-white tracking-wider uppercase mb-4">ĐĂNG KÝ NHẬN TƯ VẤN CẤU HÌNH TỐI ƯU</h3>
+                <p class="text-zinc-500 text-xs leading-relaxed max-w-md">Mechlab sở hữu đội ngũ nghiên cứu viên hàng đầu giúp tư vấn cấu hình tản nhiệt nước và modding PC độc quyền, tối ưu hóa theo mức ngân sách của bạn.</p>
+            </div>
+            
+            <form id="consultation-form" onsubmit="handleConsultationSubmit(event)" class="space-y-4 font-sans text-xs">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="Họ và tên của bạn" required class="bg-[#121214] border border-zinc-800 text-zinc-300 py-2.5 px-4 focus:outline-none focus:border-[#0000FF]">
+                    <input type="tel" placeholder="Số điện thoại" required class="bg-[#121214] border border-zinc-800 text-zinc-300 py-2.5 px-4 focus:outline-none focus:border-[#0000FF]">
+                </div>
+                <input type="text" placeholder="Sản phẩm bạn đang mong muốn tư vấn (VD: PC Titan Dual Loop)" class="w-full bg-[#121214] border border-zinc-800 text-zinc-300 py-2.5 px-4 focus:outline-none focus:border-[#0000FF]">
+                <textarea rows="3" placeholder="Nội dung bạn đang phân vân..." class="w-full bg-[#121214] border border-zinc-800 text-zinc-300 py-2.5 px-4 focus:outline-none focus:border-[#0000FF] resize-none"></textarea>
+                <button type="submit" class="bg-[#0000FF] hover:bg-blue-700 text-white font-bold py-3 px-8 transition-colors cursor-pointer select-none">GỬI YÊU CẦU TƯ VẤN</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER AREA -->
+    <footer class="bg-[#040405] border-t border-zinc-950 py-12 mt-16 select-none text-zinc-500 text-xs font-sans">
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h5 class="text-white font-black uppercase text-sm tracking-widest mb-4">HỆ THỐNG MECHLAB</h5>
+                <p class="leading-relaxed mb-2 text-zinc-400">Phòng Thí Nghiệm MECHLAB Experimental.</p>
+                <p class="leading-relaxed">Địa chỉ: 73 Khuông Việt, Phường Phú Trung, Quận Tân Phú, TP. Hồ Chí Minh</p>
+                <p class="leading-relaxed">Hotline: 0763 966 688</p>
+                <p class="leading-relaxed">Khiếu nại: 0902 301 168</p>
+            </div>
+            <div>
+                <h5 class="text-white font-black uppercase text-sm tracking-widest mb-4">CHÍNH SÁCH MUA HÀNG</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition-colors">Chính sách bảo hành 1 đổi 1 tận nơi</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Chính sách vận chuyển siêu tốc</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Bảo dưỡng tản nước trọn đời</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-black uppercase text-sm tracking-widest mb-4">PHƯƠNG THỨC THANH TOÁN</h5>
+                <p class="leading-relaxed mb-4">Chấp nhận mọi loại thẻ tín dụng Visa, Mastercard, chuyển khoản dứt điểm, ví MoMo, VNPay hoặc trả góp cực kỳ linh hoạt.</p>
+                <div class="border border-zinc-900 p-3 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="text-[#0000FF]"></i>
+                    <span class="text-[10px] uppercase font-bold text-white tracking-wider">Hệ thống thanh toán bảo mật PCI-DSS</span>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 pt-8 mt-8 border-t border-zinc-950 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 MECHLAB STORE. TRANG WEB ĐÃ PHẲNG HÓA HOÀN TOÀN TĨNH THEO YÊU CẦU.</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-white transition-colors">Facebook</a>
+                <a href="#" class="hover:text-white transition-colors">Youtube</a>
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SLIDING SHOPPING CART SIDEBAR (DRAWER) -->
+    <div id="cart-drawer" class="fixed inset-0 bg-black/60 z-[100] backdrop-blur-xs hidden justify-end">
+        <div class="w-full max-w-sm bg-[#0c0c0e] border-l border-zinc-900 h-full flex flex-col overflow-hidden relative">
+            
+            <!-- Cart Header -->
+            <div class="p-4 border-b border-zinc-900 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-white">
+                    <i data-lucide="shopping-bag" class="text-[#0000FF] w-4 h-4"></i>
+                    <h4 class="font-sans font-black text-xs uppercase tracking-wider">Giỏ hàng của bạn</h4>
+                </div>
+                <button onclick="toggleCart(false)" class="text-zinc-500 hover:text-white transition-colors cursor-pointer">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items list container -->
+            <div id="cart-list" class="flex-1 overflow-y-auto p-4 space-y-4 font-sans text-xs">
+                <!-- Cart list items will be injected by JavaScript -->
+            </div>
+
+            <!-- Cart Footer (Billing & Actions) -->
+            <div class="p-4 border-t border-zinc-900 bg-[#09090b] font-sans text-xs space-y-4">
+                <div class="flex items-center justify-between text-zinc-400 font-bold">
+                    <span>Tổng tiền tạm tính:</span>
+                    <span id="cart-total-price" class="text-[#0000FF] font-bold text-base">0 đ</span>
+                </div>
+                
+                <!-- Checkout Form inside Cart -->
+                <div id="checkout-form-container" class="space-y-2 pt-2 border-t border-zinc-900">
+                    <input type="text" id="cust-name" placeholder="Tên người nhận (để in hóa đơn)" required class="w-full bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 focus:outline-none focus:border-[#0000FF]">
+                    <input type="tel" id="cust-phone" placeholder="Số điện thoại nhận hàng" required class="w-full bg-[#121214] border border-zinc-800 text-zinc-300 py-1.5 px-3 focus:outline-none focus:border-[#0000FF]">
+                </div>
+
+                <button onclick="submitCheckout()" class="w-full bg-[#0000FF] hover:bg-blue-700 text-white font-bold py-3 uppercase tracking-widest cursor-pointer select-none text-[11px]">
+                    Đặt Hàng Ngay (Thanh toán tại nhà)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK-VIEW MODAL FOR PRODUCTS -->
+    <div id="quickview-modal" class="fixed inset-0 bg-black/70 z-[100] backdrop-blur-xs hidden items-center justify-center p-4">
+        <div class="bg-[#0c0c0e] border border-zinc-800 max-w-2xl w-full relative grid grid-cols-1 md:grid-cols-2 gap-6 p-6 overflow-hidden">
+            <button onclick="closeQuickview()" class="absolute top-4 right-4 text-zinc-500 hover:text-white cursor-pointer z-10">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Product image -->
+            <div class="aspect-square w-full bg-[#121214] border border-zinc-900 overflow-hidden flex items-center justify-center">
+                <img id="qv-image" src="" alt="" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Product Details -->
+            <div class="font-sans text-xs flex flex-col justify-between">
+                <div>
+                    <span id="qv-badge" class="bg-[#0000FF] text-white text-[8px] font-mono tracking-widest font-black py-0.5 px-1.5 uppercase inline-block mb-1">LUXURY</span>
+                    <h4 id="qv-name" class="font-sans font-black text-sm text-white uppercase leading-tight">TEN SAN PHAM</h4>
+                    <p id="qv-desc" class="text-zinc-550 leading-relaxed mt-2 text-[11px]"></p>
+                    
+                    <!-- Specifications list -->
+                    <div class="mt-4 pt-3 border-t border-zinc-900">
+                        <span class="text-[9.5px] font-mono text-zinc-500 block uppercase">Thông số kỹ thuật:</span>
+                        <ul id="qv-specs" class="space-y-1 mt-1 text-zinc-400">
+                            <!-- Injected specs details -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-zinc-900 mt-4">
+                    <div class="flex items-end justify-between gap-4">
+                        <div>
+                            <span class="text-[9px] font-mono text-zinc-500 block uppercase">Giá bán Lab:</span>
+                            <span id="qv-price" class="text-base font-bold text-[#0000FF] block"></span>
+                        </div>
+                        <button id="qv-add-btn" class="bg-[#0000FF] hover:bg-blue-700 text-white font-bold py-2.5 px-5 cursor-pointer uppercase select-none">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC CONTROLLING ALL VANILLA STORE INTERACTIONS -->
+    <script>
+        // Real list array of products so users can easily edit names, images, descriptions and prices in notepad
+        const products = [
+            {
+                id: 'pc-01',
+                name: 'MECHLAB TITAN - DUAL LOOP CUSTOM PC',
+                category: 'pc-water',
+                price: 139900000,
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=800',
+                badge: 'LUXURY',
+                description: 'Siêu phẩm Custom PC với hệ thống tản nhiệt nước Dual Loop độc lập cho CPU và GPU. Sử dụng các linh kiện đầu bảng và ống nước kim loại chrome bền bỉ.',
+                specs: {
+                    'CPU': 'Intel Core i9-14900KS (Up to 6.2GHz)',
+                    'Mainboard': 'ROG MAXIMUS Z790 HERO BTF',
+                    'VGA': 'NVIDIA ROG Strix RTX 4090 OC 24GB',
+                    'RAM': '64GB G.Skill Trident Z5 RGB 7200MHz DDR5',
+                    'SSD': '2TB Samsung 990 Pro PCIe Gen5',
+                    'Cooler': 'MECHLAB Custom Dual-Loop Hardtube'
+                }
+            },
+            {
+                id: 'pc-02',
+                name: 'MECHLAB NEON PUNK - LIQUID SYSTEM',
+                category: 'pc-water',
+                price: 68500000,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1598986644483-d052fb093315?auto=format&fit=crop&q=80&w=800',
+                badge: 'BEST BUY',
+                description: 'Dòng máy gaming hi-end trang bị tản nhiệt nước Hard-Loop neon sắc sảo. Tối ưu hóa tính thẩm mỹ và tản mát cho cấu hình RTX 4080 Super.',
+                specs: {
+                    'CPU': 'AMD Ryzen 7 7800X3D (Vua Gaming)',
+                    'Mainboard': 'MSI MPG X670E Carbon WiFi',
+                    'VGA': 'ASUS TUF Gaming RTX 4080 Super',
+                    'Cooler': 'MECHLAB Distro Plate Hardtube Acrylic'
+                }
+            },
+            {
+                id: 'kb-01',
+                name: 'MECHLAB GALAXY 75 - CNC KEYBOARD',
+                category: 'keyboard',
+                price: 5490000,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=800',
+                badge: 'PRO SERIES',
+                description: 'Bàn phím cơ thiết kế nguyên khối CNC nhôm cao cấp. Sở hữu âm thanh gõ trầm ấm và hành trình phím mượt mà không tỳ vết nhờ chế độ Lubing thủ công.',
+                specs: {
+                    'Layout': '75% Compact (82 Keys) - Núm xoay',
+                    'Case': 'Nhôm CNC 6063 Anodized',
+                    'Switches': 'Gateron Oil King (Linear, Lube Krytox)',
+                    'Connection': '3-Mode (USB-C, Bluetooth 5.1, 2.4Ghz)'
+                }
+            },
+            {
+                id: 'kb-02',
+                name: 'MECHLAB RETRO CYBER 60',
+                category: 'keyboard',
+                price: 3650000,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800',
+                badge: 'PUNK',
+                description: 'Phiên bản bàn phím cơ 60% siêu gọn nhẹ. Thiết kế vỏ acrylic mờ hắt sáng RGB huyền ảo phong cách Cyberpunk.',
+                specs: {
+                    'Layout': '60% Ultra-compact',
+                    'Case': 'Frosted Acrylic mờ nguyên khối',
+                    'Switches': 'Kailh Box Jade (Clicky)',
+                    'Connection': 'Cổng USB-C rời'
+                }
+            },
+            {
+                id: 'gr-01',
+                name: 'COILED AVIATOR POWER CABLE',
+                category: 'gear',
+                price: 490000,
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1616440347437-b1c73416efc2?auto=format&fit=crop&q=80&w=800',
+                badge: 'DECOR',
+                description: 'Dây cáp bàn phím cơ dạng xoắn bọc lưới hai lớp cao cấp kết hợp đầu nối phi công Aviator GX16 kim loại.',
+                specs: {
+                    'Chất liệu': 'Paracord bọc lưới Techflex',
+                    'Đầu nối': 'Aviator GX16 4-pin mạ',
+                    'Độ dài': '1.8 mét'
+                }
+            }
+        ];
+
+        let cart = [];
+        let currentSlide = 0;
+        let searchQuery = "";
+        let selectedCategory = "all";
+
+        // Formatter function
+        function vnFormatter(price) {
+            return price.toLocaleString('vi-VN') + ' đ';
+        }
+
+        // Render Catalog Grid
+        function renderCatalog() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = "";
+            
+            const filtered = products.filter(p => {
+                const matchesCat = (selectedCategory === "all") || (p.category === selectedCategory);
+                const matchesKeyword = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                       p.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesKeyword;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                  <div class="col-span-full py-12 text-center text-zinc-650 font-mono text-sm uppercase">
+                     Không tìm thấy sản phẩm trùng khớp với bộ lọc
+                  </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(p => {
+                const item = document.createElement('div');
+                item.className = "bg-[#0c0c0e] border border-zinc-900 group flex flex-col justify-between";
+                item.innerHTML = `
+                    <div class="relative aspect-video w-full bg-[#121214] border-b border-zinc-950 overflow-hidden cursor-pointer" onclick="openQuickview('${p.id}')">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                        <span class="absolute top-3 left-3 bg-[#0000FF] text-white text-[8px] font-mono tracking-widest font-black py-0.5 px-2 uppercase">${p.badge}</span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-sans font-bold text-xs text-white uppercase tracking-wider mb-2 leading-snug cursor-pointer hover:text-[#0000FF] transition-colors" onclick="openQuickview('${p.id}')">${p.name}</h4>
+                            <p class="text-zinc-500 text-[10.5px] leading-relaxed truncate-2-lines">${p.description}</p>
+                        </div>
+                        <div class="pt-4 border-t border-zinc-950 mt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-[9px] font-mono text-zinc-500 block uppercase select-none">Giá Lab</span>
+                                <span class="text-sm font-black text-[#0000FF] block">${vnFormatter(p.price)}</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="openQuickview('${p.id}')" class="bg-[#121214] hover:bg-zinc-900 hover:border-zinc-700 text-zinc-400 py-1.5 px-3 border border-zinc-800 transition-colors uppercase font-mono text-[9.5px]">XEM</button>
+                                <button onclick="addToCart('${p.id}')" class="bg-[#0000FF] hover:bg-blue-700 text-white font-bold py-1.5 px-3 transition-colors uppercase text-[9.5px] cursor-pointer">MUA</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        // Toggle Category active tabs
+        function filterCategory(catId) {
+            selectedCategory = catId;
+            document.querySelectorAll('.category-tab').forEach(b => {
+                b.className = "category-tab bg-[#121214] border border-zinc-800 text-zinc-450 py-2 px-3 hover:border-zinc-750 transition-colors uppercase font-bold";
+            });
+            const activeTabButton = document.getElementById('tab-' + catId);
+            if (activeTabButton) {
+                activeTabButton.className = "category-tab bg-[#0000FF] text-white py-2 px-3 hover:bg-blue-700 transition-colors uppercase font-bold";
+            }
+            renderCatalog();
+        }
+
+        // Handle text searches
+        function handleSearch(val) {
+            searchQuery = val;
+            renderCatalog();
+        }
+
+        // Slide Banner operations
+        const slides = document.querySelectorAll('.slide');
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        setInterval(nextSlide, 7000); // 7s auto slide transitions
+
+        // Shopping Cart operations
+        function toggleCart(status) {
+            const cartDrawer = document.getElementById('cart-drawer');
+            if (status) {
+                cartDrawer.classList.remove('hidden');
+                cartDrawer.classList.add('flex');
+                renderCart();
+            } else {
+                cartDrawer.classList.add('hidden');
+                cartDrawer.classList.remove('flex');
+            }
+        }
+
+        function addToCart(pId) {
+            const product = products.find(p => p.id === pId);
+            if (!product) return;
+            const existing = cart.find(item => item.product.id === pId);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ product, quantity: 1 });
+            }
+            updateCounters();
+            toggleCart(true);
+        }
+
+        function removeCartItem(pId) {
+            cart = cart.filter(item => item.product.id !== pId);
+            updateCounters();
+            renderCart();
+        }
+
+        function adjustQuantity(pId, change) {
+            const item = cart.find(item => item.product.id === pId);
+            if (!item) return;
+            item.quantity += change;
+            if (item.quantity <= 0) {
+                removeCartItem(pId);
+            } else {
+                updateCounters();
+                renderCart();
+            }
+        }
+
+        function updateCounters() {
+            const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+            document.getElementById('cart-counter').innerText = count;
+        }
+
+        function renderCart() {
+            const list = document.getElementById('cart-list');
+            list.innerHTML = "";
+            let total = 0;
+
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="h-44 flex flex-col items-center justify-center text-zinc-650 uppercase font-mono tracking-wider">
+                        <i data-lucide="shopping-bag" class="w-8 h-8 mb-2"></i>
+                        <span>Giỏ hàng đang trống</span>
+                    </div>
+                `;
+                document.getElementById('cart-total-price').innerText = "0 đ";
+                lucide.createIcons();
+                return;
+            }
+
+            cart.forEach(item => {
+                const subTotal = item.product.price * item.quantity;
+                total += subTotal;
+                const div = document.createElement('div');
+                div.className = "flex justify-between gap-3 bg-[#121214] p-3 border border-zinc-900";
+                div.innerHTML = `
+                    <div class="w-12 h-12 bg-zinc-950 overflow-hidden shrink-0 border border-zinc-900">
+                        <img src="${item.product.image}" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h5 class="text-white text-[11.5px] font-bold uppercase truncate leading-tight">${item.product.name}</h5>
+                        <p class="text-[#0000FF] font-bold mb-1.5 mt-0.5">${vnFormatter(item.product.price)}</p>
+                        <div class="flex items-center gap-2">
+                            <button onclick="adjustQuantity('${item.product.id}', -1)" class="w-5 h-5 bg-zinc-800 text-zinc-350 flex items-center justify-center font-bold pb-0.5 hover:text-white cursor-pointer">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="adjustQuantity('${item.product.id}', 1)" class="w-5 h-5 bg-zinc-800 text-zinc-350 flex items-center justify-center font-bold pb-0.5 hover:text-white cursor-pointer">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeCartItem('${item.product.id}')" class="text-zinc-650 hover:text-red-500 self-start p-1 bg-transparent cursor-pointer">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+
+            document.getElementById('cart-total-price').innerText = vnFormatter(total);
+            lucide.createIcons();
+        }
+
+        // Submitting orders
+        function submitCheckout() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            if (!name || !phone) {
+                alert("Xin vui lòng nhập đầy đủ tên và số điện thoại người nhận!");
+                return;
+            }
+            alert("Chúc mừng! Đặt hàng thành công.\nMã hóa đơn của bạn là: MECH-" + Math.floor(Math.random() * 90000 + 10000) + "\nMECHLAB sẽ liên hệ với bạn trong vòng 15 phút.");
+            cart = [];
+            updateCounters();
+            toggleCart(false);
+            document.getElementById('cust-name').value = "";
+            document.getElementById('cust-phone').value = "";
+        }
+
+        // PC Customizer estimation math
+        function calculatePCPrice() {
+            const cpu = parseInt(document.getElementById('pc-cpu').value);
+            const main = parseInt(document.getElementById('pc-main').value);
+            const vga = parseInt(document.getElementById('pc-vga').value);
+            const ram = parseInt(document.getElementById('pc-ram').value);
+            const ssd = parseInt(document.getElementById('pc-ssd').value);
+            const water = parseInt(document.getElementById('pc-water-cool').value);
+
+            const total = cpu + main + vga + ram + ssd + water;
+            document.getElementById('pc-total-price').innerText = vnFormatter(total || 0);
+            return total;
+        }
+
+        function addCustomPCToCart() {
+            const price = calculatePCPrice();
+            if (price === 0) {
+                alert("Vui lòng thiết lập cấu hình trước khi thêm!");
+                return;
+            }
+            const item = {
+                id: 'pc-custom-' + Date.now(),
+                name: 'CẤU HÌNH PC PHỐI RIÊNG TẠO SẴN',
+                price: price,
+                image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=800',
+                description: 'PC lắp đặt tay chuẩn phòng thí nghiệm với sự lựa chọn cụ thể của bạn.'
+            };
+            cart.push({ product: item, quantity: 1 });
+            updateCounters();
+            toggleCart(true);
+        }
+
+        // Mechanical Keyboard Customizer estimation math
+        function calculateKBPrice() {
+            const layout = parseInt(document.getElementById('kb-layout').value);
+            const body = parseInt(document.getElementById('kb-case').value);
+            const sw = parseInt(document.getElementById('kb-switch').value);
+            const keys = parseInt(document.getElementById('kb-keycap').value);
+            const cbl = parseInt(document.getElementById('kb-cable').value);
+
+            const total = layout + body + sw + keys + cbl;
+            document.getElementById('kb-total-price').innerText = vnFormatter(total || 0);
+            return total;
+        }
+
+        function addCustomKBToCart() {
+            const price = calculateKBPrice();
+            const item = {
+                id: 'kb-custom-' + Date.now(),
+                name: 'BÀN PHÍM CƠ BUILDER COMBO',
+                price: price,
+                image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=800',
+                description: 'Combo linh kiện phím dầy, bao gồm vỏ nhôm, keycaps và switches lube tay hoàn chỉnh.'
+            };
+            cart.push({ product: item, quantity: 1 });
+            updateCounters();
+            toggleCart(true);
+        }
+
+        // Quick View actions
+        function openQuickview(pId) {
+            const product = products.find(p => p.id === pId);
+            if (!product) return;
+
+            document.getElementById('qv-image').src = product.image;
+            document.getElementById('qv-badge').innerText = product.badge;
+            document.getElementById('qv-name').innerText = product.name;
+            document.getElementById('qv-desc').innerText = product.description;
+            document.getElementById('qv-price').innerText = vnFormatter(product.price);
+
+            const specsList = document.getElementById('qv-specs');
+            specsList.innerHTML = "";
+            for (const [key, val] of Object.entries(product.specs)) {
+                specsList.innerHTML += `
+                    <li class="flex items-center gap-1.5"><span class="text-zinc-600">${key}:</span> <span class="text-zinc-300 font-bold">${val}</span></li>
+                `;
+            }
+
+            document.getElementById('qv-add-btn').onclick = function() {
+                addToCart(product.id);
+                closeQuickview();
+            };
+
+            document.getElementById('quickview-modal').classList.remove('hidden');
+            document.getElementById('quickview-modal').classList.add('flex');
+        }
+
+        function closeQuickview() {
+            document.getElementById('quickview-modal').classList.add('hidden');
+            document.getElementById('quickview-modal').classList.remove('flex');
+        }
+
+        // Inquiries consultation submit simulation
+        function handleConsultationSubmit(e) {
+            e.preventDefault();
+            alert("Yêu cầu nhận tư vấn thành công!\nCác chuyên gia phòng Lab MECHLAB sẽ gọi điện hoặc gửi tin nhắn SMS để trao đổi với bạn trong giây lát.");
+            document.getElementById('consultation-form').reset();
+        }
+
+        // Initial launch setups
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCatalog();
+            // Start Lucide Icon rendering
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
